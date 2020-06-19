@@ -15,11 +15,12 @@ import {
 } from "@material-ui/core";
 import Item from "./Item";
 import SignUp from "./SignUp";
+import Upload from "./Upload";
 
 const App: React.FunctionComponent = () => {
   return (
     <div>
-      <SignUp></SignUp>
+      <Upload></Upload>
     </div>
   );
 };

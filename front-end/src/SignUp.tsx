@@ -26,6 +26,7 @@ const App: React.FunctionComponent = () => {
         width: "100vw",
         backgroundImage: "url(" + require("./background.jpg") + ")",
         backgroundSize: "100%",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <Grid
@@ -51,8 +52,7 @@ const App: React.FunctionComponent = () => {
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
               <TextField
-                required
-                id="outlined-required"
+                id="outlined-"
                 label="Dealership Name"
                 variant="outlined"
                 fullWidth
@@ -60,8 +60,7 @@ const App: React.FunctionComponent = () => {
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
               <TextField
-                required
-                id="outlined-required"
+                id="outlined-"
                 label="Address"
                 variant="outlined"
                 fullWidth
@@ -69,8 +68,7 @@ const App: React.FunctionComponent = () => {
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
               <TextField
-                required
-                id="outlined-required"
+                id="outlined-"
                 label="Phone number"
                 variant="outlined"
                 fullWidth
@@ -78,8 +76,7 @@ const App: React.FunctionComponent = () => {
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
               <TextField
-                required
-                id="outlined-required"
+                id="outlined-"
                 label="Email"
                 variant="outlined"
                 fullWidth
@@ -87,8 +84,7 @@ const App: React.FunctionComponent = () => {
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
               <TextField
-                required
-                id="outlined-required"
+                id="outlined-"
                 label="Phone number"
                 variant="outlined"
                 fullWidth
