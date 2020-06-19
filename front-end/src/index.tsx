@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./Components/App";
+import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -9,7 +9,7 @@ import { grey } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
-    primary: grey,
+    type: "dark",
   },
 });
 
