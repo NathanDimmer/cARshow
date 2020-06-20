@@ -1,48 +1,70 @@
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Box,
-  Grid,
-  Container,
-  Divider,
-} from "@material-ui/core";
-import Item from "./Item";
 import { PAGES } from "./App";
+import { NotificationMessage } from "./Misc/Notifications";
+import { createDealership } from "./Scripts/firebaseCreateDealership";
 
-interface PageProps {
+interface SignUpProps {
   dealerName: string;
   dealerAddress: string;
+  dealerEmail: string;
   dealerPhone: string;
-  cars: Array<object>;
-  page: PAGES;
   setDealerName: Function;
   setDealerAddress: Function;
+  setDealerEmail: Function;
   setDealerPhone: Function;
-  setCars: Function;
   setPage: Function;
+  setNotification: (notification: NotificationMessage) => void;
 }
 
-const SignUp: React.FunctionComponent<PageProps> = ({
+const SignUp: React.FunctionComponent<SignUpProps> = ({
   dealerName,
   dealerAddress,
+  dealerEmail,
   dealerPhone,
-  cars,
-  page,
   setDealerName,
   setDealerAddress,
+  setDealerEmail,
   setDealerPhone,
-  setCars,
   setPage,
+  setNotification,
 }) => {
+  const [password, setPassword] = React.useState<string>("");
+  const [password2, setPassword2] = React.useState<string>("");
+
+  const handleCreateAccount = () => {
+    if (password === password2) {
+      createDealership(
+        dealerName,
+        dealerAddress,
+        dealerEmail,
+        dealerPhone,
+        password
+      ).then((result) => {
+        if (result) {
+          setNotification({
+            type: "success",
+            message: "New Dealership Account Created Successfully.",
+            open: true,
+          });
+          setPage(PAGES.UPLOAD);
+        } else {
+          setNotification({
+            type: "error",
+            message: "Unable to create account. Please try again later.",
+            open: true,
+          });
+        }
+      });
+    } else {
+      setNotification({
+        type: "error",
+        message: "Unable to create account. Passwords do not match.",
+        open: true,
+      });
+    }
+  };
+
   return (
     <div
       style={{
@@ -114,6 +136,9 @@ const SignUp: React.FunctionComponent<PageProps> = ({
                 label="Email"
                 variant="outlined"
                 fullWidth
+                onChange={(event) => {
+                  setDealerEmail(event.target.value);
+                }}
               />
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
@@ -123,16 +148,26 @@ const SignUp: React.FunctionComponent<PageProps> = ({
                 variant="outlined"
                 fullWidth
                 type="password"
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+            </Grid>
+            <Grid item style={{ marginBottom: "15px" }}>
+              <TextField
+                id="outlined-"
+                label="Confirm Password"
+                variant="outlined"
+                fullWidth
+                type="password"
+                onChange={(event) => {
+                  setPassword2(event.target.value);
+                }}
               />
             </Grid>
             <Grid item>
               <Box style={{ float: "right" }}>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setPage(PAGES.UPLOAD);
-                  }}
-                >
+                <Button variant="contained" onClick={handleCreateAccount}>
                   Continue
                 </Button>
               </Box>

@@ -1,54 +1,26 @@
-import React, { Fragment } from "react";
 import {
   AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Box,
-  Grid,
-  Container,
-  Divider,
-  Fab,
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogContentText,
-  DialogActions,
+  DialogTitle,
+  Fab,
+  Grid,
+  Toolbar,
+  Typography,
 } from "@material-ui/core";
-import Item from "./Item";
-import { DropzoneArea } from "material-ui-dropzone";
-import { PAGES } from "./App";
 import AddIcon from "@material-ui/icons/Add";
+import React, { Fragment } from "react";
+import { PAGES } from "./App";
 
-interface PageProps {
+interface ManageProps {
   dealerName: string;
-  dealerAddress: string;
-  dealerPhone: string;
   cars: any;
-  page: PAGES;
-  setDealerName: Function;
-  setDealerAddress: Function;
-  setDealerPhone: Function;
-  setCars: Function;
   setPage: Function;
 }
 
-const Manage: React.FunctionComponent<PageProps> = ({
+const Manage: React.FunctionComponent<ManageProps> = ({
   dealerName,
-  dealerAddress,
-  dealerPhone,
   cars,
-  page,
-  setDealerName,
-  setDealerAddress,
-  setDealerPhone,
-  setCars,
   setPage,
 }) => {
   const [newProfilePicture, setNewProfilePicture] = React.useState<any>(null);
@@ -91,10 +63,13 @@ const Manage: React.FunctionComponent<PageProps> = ({
           <Typography
             variant="h6"
             onClick={() => {
-              setPage(PAGES.SHOWROOM);
+              window.location.href = `${
+                window.location.href
+              }?dealership=${encodeURI(dealerName)}`;
             }}
           >
-            {"https://carshowroomar.web.app/" + encodeURI(dealerName)}
+            {"https://carshowroomar.web.app?dealership=" +
+              encodeURI(dealerName)}
           </Typography>
         </Toolbar>
       </AppBar>
