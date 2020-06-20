@@ -1,56 +1,30 @@
-import React, { Fragment } from "react";
 import {
   AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Box,
-  Grid,
-  Container,
-  Divider,
-  Fab,
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogContentText,
-  DialogActions,
+  DialogTitle,
+  Grid,
+  TextField,
+  Toolbar,
+  Typography,
 } from "@material-ui/core";
-import Item from "./Item";
-import { DropzoneArea } from "material-ui-dropzone";
-import { PAGES } from "./App";
-import AddIcon from "@material-ui/icons/Add";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import React, { Fragment } from "react";
 
-interface PageProps {
+interface ShowroomProps {
   dealerName: string;
   dealerAddress: string;
+  dealerEmail: string;
   dealerPhone: string;
   cars: any;
-  page: PAGES;
-  setDealerName: Function;
-  setDealerAddress: Function;
-  setDealerPhone: Function;
-  setCars: Function;
-  setPage: Function;
 }
 
-const Showroom: React.FunctionComponent<PageProps> = ({
+const Showroom: React.FunctionComponent<ShowroomProps> = ({
   dealerName,
   dealerAddress,
+  dealerEmail,
   dealerPhone,
   cars,
-  page,
-  setDealerName,
-  setDealerAddress,
-  setDealerPhone,
-  setCars,
-  setPage,
 }) => {
   const [newProfilePicture, setNewProfilePicture] = React.useState<any>(null);
 
@@ -128,7 +102,6 @@ const Showroom: React.FunctionComponent<PageProps> = ({
             id="combo-box-demo"
             options={makes}
             getOptionLabel={(option) => option as string}
-            style={{ width: 200, marginRight: "15px" }}
             renderInput={(params) => (
               <TextField {...params} label="Make" variant="outlined" />
             )}
@@ -141,7 +114,6 @@ const Showroom: React.FunctionComponent<PageProps> = ({
             id="combo-box-demo"
             options={models}
             getOptionLabel={(option) => option as string}
-            style={{ width: 200, marginRight: "15px" }}
             renderInput={(params) => (
               <TextField {...params} label="Model" variant="outlined" />
             )}
@@ -154,13 +126,12 @@ const Showroom: React.FunctionComponent<PageProps> = ({
             id="combo-box-demo"
             options={years}
             getOptionLabel={(option) => option as string}
-            style={{ width: 200, marginRight: "15px" }}
             renderInput={(params) => (
               <TextField {...params} label="Year" variant="outlined" />
             )}
           />
           <Typography variant="h6" style={{ marginLeft: "auto" }}>
-            {dealerAddress + ", " + dealerPhone}
+            {dealerAddress + ", " + dealerEmail + ", " + dealerPhone}
           </Typography>
         </Toolbar>
       </AppBar>

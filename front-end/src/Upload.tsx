@@ -1,48 +1,21 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Box,
-  Grid,
-  Container,
-  Divider,
-} from "@material-ui/core";
-import Item from "./Item";
+import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
 import { DropzoneArea } from "material-ui-dropzone";
+import React from "react";
 import { PAGES } from "./App";
+import { NotificationMessage } from "./Misc/Notifications";
 
-interface PageProps {
-  dealerName: string;
-  dealerAddress: string;
-  dealerPhone: string;
+interface UploadProps {
   cars: Array<object>;
-  page: PAGES;
-  setDealerName: Function;
-  setDealerAddress: Function;
-  setDealerPhone: Function;
   setCars: Function;
   setPage: Function;
+  setNotification: (notification: NotificationMessage) => void;
 }
 
-const Upload: React.FunctionComponent<PageProps> = ({
-  dealerName,
-  dealerAddress,
-  dealerPhone,
+const Upload: React.FunctionComponent<UploadProps> = ({
   cars,
-  page,
-  setDealerName,
-  setDealerAddress,
-  setDealerPhone,
   setCars,
   setPage,
+  setNotification,
 }) => {
   const [newProfilePicture, setNewProfilePicture] = React.useState<any>(null);
 

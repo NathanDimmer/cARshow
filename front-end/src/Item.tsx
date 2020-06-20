@@ -1,5 +1,5 @@
-import React, { Fragment, ReactElement } from "react";
-import { Grid, Box, Typography } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
+import React, { Fragment } from "react";
 
 declare interface itemProps {
   file: string;
