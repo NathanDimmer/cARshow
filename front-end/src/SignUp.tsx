@@ -16,8 +16,33 @@ import {
   Divider,
 } from "@material-ui/core";
 import Item from "./Item";
+import { PAGES } from "./App";
 
-const App: React.FunctionComponent = () => {
+interface PageProps {
+  dealerName: string;
+  dealerAddress: string;
+  dealerPhone: string;
+  cars: Array<object>;
+  page: PAGES;
+  setDealerName: Function;
+  setDealerAddress: Function;
+  setDealerPhone: Function;
+  setCars: Function;
+  setPage: Function;
+}
+
+const SignUp: React.FunctionComponent<PageProps> = ({
+  dealerName,
+  dealerAddress,
+  dealerPhone,
+  cars,
+  page,
+  setDealerName,
+  setDealerAddress,
+  setDealerPhone,
+  setCars,
+  setPage,
+}) => {
   return (
     <div
       style={{
@@ -56,6 +81,9 @@ const App: React.FunctionComponent = () => {
                 label="Dealership Name"
                 variant="outlined"
                 fullWidth
+                onChange={(event) => {
+                  setDealerName(event.target.value);
+                }}
               />
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
@@ -64,6 +92,9 @@ const App: React.FunctionComponent = () => {
                 label="Address"
                 variant="outlined"
                 fullWidth
+                onChange={(event) => {
+                  setDealerAddress(event.target.value);
+                }}
               />
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
@@ -72,6 +103,9 @@ const App: React.FunctionComponent = () => {
                 label="Phone number"
                 variant="outlined"
                 fullWidth
+                onChange={(event) => {
+                  setDealerPhone(event.target.value);
+                }}
               />
             </Grid>
             <Grid item style={{ marginBottom: "15px" }}>
@@ -85,14 +119,22 @@ const App: React.FunctionComponent = () => {
             <Grid item style={{ marginBottom: "15px" }}>
               <TextField
                 id="outlined-"
-                label="Phone number"
+                label="Password"
                 variant="outlined"
                 fullWidth
+                type="password"
               />
             </Grid>
             <Grid item>
               <Box style={{ float: "right" }}>
-                <Button variant="contained">Continue</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setPage(PAGES.UPLOAD);
+                  }}
+                >
+                  Continue
+                </Button>
               </Box>
             </Grid>
           </Grid>
@@ -102,4 +144,4 @@ const App: React.FunctionComponent = () => {
   );
 };
 
-export default App;
+export default SignUp;
