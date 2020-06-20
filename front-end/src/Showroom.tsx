@@ -39,7 +39,7 @@ interface PageProps {
   setPage: Function;
 }
 
-const Manage: React.FunctionComponent<PageProps> = ({
+const Showroom: React.FunctionComponent<PageProps> = ({
   dealerName,
   dealerAddress,
   dealerPhone,
@@ -88,13 +88,8 @@ const Manage: React.FunctionComponent<PageProps> = ({
           <Typography variant="h5" style={{ marginRight: "auto" }}>
             {dealerName}
           </Typography>
-          <Typography
-            variant="h6"
-            onClick={() => {
-              setPage(PAGES.SHOWROOM);
-            }}
-          >
-            {"https://carshowroomar.web.app/" + encodeURI(dealerName)}
+          <Typography variant="h6">
+            {dealerAddress + ", " + dealerPhone}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -115,25 +110,6 @@ const Manage: React.FunctionComponent<PageProps> = ({
             overflowX: "hidden",
           }}
         >
-          <Fab
-            aria-label="add"
-            style={{
-              backgroundColor: "#59595970",
-              margin: 0,
-              top: "auto",
-              right: 40,
-              bottom: 40,
-              left: "auto",
-              position: "fixed",
-            }}
-            color="secondary"
-            size="large"
-            onClick={() => {
-              setPage(PAGES.UPLOAD);
-            }}
-          >
-            <AddIcon />
-          </Fab>
           <div style={{ width: "90%", marginLeft: "5%" }}>
             <Grid container direction="row" spacing={4}>
               {/* <Grid item xs={12} sm={6} md={4} style={{ marginTop: "20px" }}>
@@ -241,4 +217,4 @@ const Manage: React.FunctionComponent<PageProps> = ({
   );
 };
 
-export default Manage;
+export default Showroom;

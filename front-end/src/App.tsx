@@ -17,11 +17,13 @@ import Item from "./Item";
 import SignUp from "./SignUp";
 import Upload from "./Upload";
 import Manage from "./Manage";
+import Showroom from "./Showroom";
 
 export enum PAGES {
   "SIGNUP",
   "UPLOAD",
   "MANAGE",
+  "SHOWROOM",
 }
 
 const App: React.FunctionComponent = () => {
@@ -31,7 +33,7 @@ const App: React.FunctionComponent = () => {
 
   const [cars, setCars] = React.useState([]);
 
-  const [page, setPage] = React.useState(PAGES.MANAGE);
+  const [page, setPage] = React.useState(PAGES.SIGNUP);
 
   return (
     <Fragment>
@@ -76,6 +78,21 @@ const App: React.FunctionComponent = () => {
           setCars={setCars}
           setPage={setPage}
         ></Manage>
+      )}
+
+      {page === PAGES.SHOWROOM && (
+        <Showroom
+          dealerName={dealerName}
+          dealerAddress={dealerAddress}
+          dealerPhone={dealerPhone}
+          cars={cars}
+          page={page}
+          setDealerName={setDealerName}
+          setDealerAddress={setDealerAddress}
+          setDealerPhone={setDealerPhone}
+          setCars={setCars}
+          setPage={setPage}
+        ></Showroom>
       )}
     </Fragment>
   );
