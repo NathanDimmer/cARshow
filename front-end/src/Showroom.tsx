@@ -25,6 +25,7 @@ import Item from "./Item";
 import { DropzoneArea } from "material-ui-dropzone";
 import { PAGES } from "./App";
 import AddIcon from "@material-ui/icons/Add";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 interface PageProps {
   dealerName: string;
@@ -78,6 +79,14 @@ const Showroom: React.FunctionComponent<PageProps> = ({
     info: "",
   });
 
+  const [makes, setMakes] = React.useState<any>([]);
+  const [models, setModels] = React.useState<any>([]);
+  const [years, setYears] = React.useState<any>([]);
+
+  const [makeValue, setMakeValue] = React.useState<string | null>(null);
+  const [modelValue, setModelValue] = React.useState<string | null>(null);
+  const [yearValue, setYearValue] = React.useState<string | null>(null);
+
   return (
     <Fragment>
       <AppBar
@@ -85,10 +94,72 @@ const Showroom: React.FunctionComponent<PageProps> = ({
         style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
       >
         <Toolbar>
+          {cars.map(
+            (
+              value: {
+                make: string;
+                model: string;
+                year: string;
+                image: string;
+                file: string;
+                info: string;
+              },
+              index: any
+            ) => {
+              if (!makes.includes(value.make)) {
+                makes.push(value.make);
+              }
+              if (!models.includes(value.model)) {
+                models.push(value.model);
+              }
+              if (!years.includes(value.year)) {
+                years.push(value.year);
+              }
+            }
+          )}
           <Typography variant="h5" style={{ marginRight: "auto" }}>
             {dealerName}
           </Typography>
-          <Typography variant="h6">
+          <Autocomplete
+            value={makeValue}
+            onChange={(event, newValue: string | null) => {
+              setMakeValue(newValue);
+            }}
+            id="combo-box-demo"
+            options={makes}
+            getOptionLabel={(option) => option as string}
+            style={{ width: 200, marginRight: "15px" }}
+            renderInput={(params) => (
+              <TextField {...params} label="Make" variant="outlined" />
+            )}
+          />
+          <Autocomplete
+            value={modelValue}
+            onChange={(event, newValue: string | null) => {
+              setModelValue(newValue);
+            }}
+            id="combo-box-demo"
+            options={models}
+            getOptionLabel={(option) => option as string}
+            style={{ width: 200, marginRight: "15px" }}
+            renderInput={(params) => (
+              <TextField {...params} label="Model" variant="outlined" />
+            )}
+          />
+          <Autocomplete
+            value={yearValue}
+            onChange={(event, newValue: string | null) => {
+              setYearValue(newValue);
+            }}
+            id="combo-box-demo"
+            options={years}
+            getOptionLabel={(option) => option as string}
+            style={{ width: 200, marginRight: "15px" }}
+            renderInput={(params) => (
+              <TextField {...params} label="Year" variant="outlined" />
+            )}
+          />
+          <Typography variant="h6" style={{ marginLeft: "auto" }}>
             {dealerAddress + ", " + dealerPhone}
           </Typography>
         </Toolbar>
@@ -146,40 +217,47 @@ const Showroom: React.FunctionComponent<PageProps> = ({
                   },
                   index: any
                 ) => {
-                  return (
-                    <Grid
-                      item
-                      xs={12}
-                      sm={6}
-                      md={4}
-                      style={{ marginTop: "20px" }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: "#59595950",
-                          paddingBottom: "15px",
-                          borderRadius: "20px",
-                        }}
-                        onClick={() => {
-                          setCurrentCar(value);
-                          handleClickOpen();
-                        }}
+                  console.log(makeValue);
+                  if (
+                    (value.make === makeValue || makeValue === null) &&
+                    (value.model === modelValue || modelValue === null) &&
+                    (value.year === yearValue || yearValue === null)
+                  ) {
+                    return (
+                      <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        md={4}
+                        style={{ marginTop: "20px" }}
                       >
-                        <img
-                          src={value.image}
-                          width="100%"
-                          style={{ borderRadius: "20px" }}
-                        ></img>
-                        <Typography
-                          variant="h6"
-                          style={{ paddingLeft: "10px" }}
-                          color="textPrimary"
+                        <div
+                          style={{
+                            backgroundColor: "#59595950",
+                            paddingBottom: "15px",
+                            borderRadius: "20px",
+                          }}
+                          onClick={() => {
+                            setCurrentCar(value);
+                            handleClickOpen();
+                          }}
                         >
-                          {value.make + " " + value.model + ", " + value.year}
-                        </Typography>
-                      </div>
-                    </Grid>
-                  );
+                          <img
+                            src={value.image}
+                            width="100%"
+                            style={{ borderRadius: "20px" }}
+                          ></img>
+                          <Typography
+                            variant="h6"
+                            style={{ paddingLeft: "10px" }}
+                            color="textPrimary"
+                          >
+                            {value.make + " " + value.model + ", " + value.year}
+                          </Typography>
+                        </div>
+                      </Grid>
+                    );
+                  }
                 }
               )}
             </Grid>
