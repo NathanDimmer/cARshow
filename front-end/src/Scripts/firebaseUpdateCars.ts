@@ -4,7 +4,7 @@ export const updateCars = (name: string, cars: any) => {
   return firebaseApp
     .firestore()
     .collection("dealerships")
-    .doc(encodeURI(name))
+    .doc(encodeURI(name.replace(/ /g, "")))
     .update({ cars })
     .then(() => true)
     .catch((err) => {

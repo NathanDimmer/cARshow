@@ -4,7 +4,7 @@ export const getCars = (name: string) => {
   return firebaseApp
     .firestore()
     .collection("dealerships")
-    .doc(encodeURI(name))
+    .doc(encodeURI(name.replace(/ /g, "")))
     .get()
     .then((value) => {
       const data = value.data();

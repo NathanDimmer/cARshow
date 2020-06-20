@@ -131,7 +131,7 @@ const Showroom: React.FunctionComponent<ShowroomProps> = ({
             )}
           />
           <Typography variant="h6" style={{ marginLeft: "auto" }}>
-            {dealerAddress + ", " + dealerEmail + ", " + dealerPhone}
+            {dealerAddress + ", " + dealerPhone}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -223,7 +223,7 @@ const Showroom: React.FunctionComponent<ShowroomProps> = ({
                             style={{ paddingLeft: "10px" }}
                             color="textPrimary"
                           >
-                            {value.make + " " + value.model + ", " + value.year}
+                            {value.year + " " + value.make + " " + value.model}
                           </Typography>
                         </div>
                       </Grid>
