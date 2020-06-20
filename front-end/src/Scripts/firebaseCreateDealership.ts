@@ -10,7 +10,7 @@ export const createDealership = (
   return firebaseApp
     .firestore()
     .collection("dealerships")
-    .doc(encodeURI(name))
+    .doc(encodeURI(name.replace(/ /g, "")))
     .set({ name, address, email, phone, password, cars: [] })
     .then(() => true)
     .catch((err) => {

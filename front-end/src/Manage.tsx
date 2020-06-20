@@ -65,11 +65,11 @@ const Manage: React.FunctionComponent<ManageProps> = ({
             onClick={() => {
               window.location.href = `${
                 window.location.href
-              }?dealership=${encodeURI(dealerName)}`;
+              }?dealership=${encodeURI(dealerName.replace(/ /g, ""))}`;
             }}
           >
             {"https://carshowroomar.web.app?dealership=" +
-              encodeURI(dealerName)}
+              encodeURI(dealerName.replace(/ /g, ""))}
           </Typography>
         </Toolbar>
       </AppBar>
